@@ -2,52 +2,92 @@ import React, { useState } from "react";
 import axios from "axios";
 
 const parseInput = (text) => {
-  try {
-    const lines = text
-      .trim()
-      .split("\n")
-      .filter((line) => line.trim() !== "");
+  const lines = text
+    .trim()
+    .split("\n")
+    .map((line) => line.trim())
+    .filter((line) => line !== "");
 
-    // Extração do nome
-    const nameLine =
-      lines.find((line) => line.includes(" scored ")) || lines[0];
-    const name =
-      nameLine
-        .split(" scored ")[0]
-        .replace("#WhenTaken", "")
-        .replace(/#\d+/, "")
-        .trim() || "Jogador";
+  // Verificação rigorosa da estrutura
+  if (lines.length < 7) {
+    throw new Error("Formato inválido: Número insuficiente de linhas");
+  }
 
-    // Extração da pontuação total
-    const totalScoreLine =
-      lines.find((line) => line.includes(" scored ")) || lines[1];
-    const totalScore = parseInt(totalScoreLine.match(/\d+/)[0]) || 0;
+  // Extração segura da data
+  const dateLine = lines[0];
+  const dateMatch = dateLine.match(/\((\d{2}\.\d{2}\.\d{4})\)/);
+  if (!dateMatch || !dateMatch[1]) {
+    throw new Error("Formato de data inválido na primeira linha");
+  }
 
-    // Extração dos detalhes
-    const details = lines
-      .filter((line) => line.includes("📍"))
-      .slice(0, 5)
-      .map((line) => {
-        const parts = line.split(" - ");
-        return {
-          distance:
-            parseFloat(parts[0].match(/[\d.]+/)[0]) *
-            (parts[0].includes("K") ? 1000 : 1),
-          years: parseInt(parts[1].match(/\d+/)[0]) || 0,
-          medal: parts[2].slice(0, 2),
-          medalScore: parseInt(parts[2].match(/\d+/)[0]) || 0,
-        };
-      });
+  // Conversão segura da data
+  const dateParts = dateMatch[1].split(".");
+  if (dateParts.length !== 3) {
+    throw new Error("Formato de data deve ser DD.MM.YYYY");
+  }
+
+  const [day, month, year] = dateParts;
+  const gameDate = `${year}-${month.padStart(2, "0")}-${day.padStart(2, "0")}`;
+
+  // Validação da data
+  const dateObj = new Date(gameDate);
+  if (isNaN(dateObj.getTime())) {
+    throw new Error(`Data inválida: ${gameDate}`);
+  }
+
+  // Extração segura do nome e pontuação
+  const scoreLine = lines[1];
+  if (!scoreLine.includes(" scored ")) {
+    throw new Error("Formato inválido: Linha de pontuação ausente");
+  }
+
+  const [namePart, scorePart] = scoreLine.split(" scored ");
+  const name = namePart.replace("#WhenTaken", "").trim();
+  const totalScore = parseInt(scorePart.match(/\d+/)?.[0] || 0);
+
+  // Validação dos detalhes
+  const detailsLines = lines.slice(2, 7);
+  if (detailsLines.length !== 5) {
+    throw new Error("Deve haver exatamente 5 rounds");
+  }
+
+  const details = detailsLines.map((line, index) => {
+    const parts = line.split(" - ");
+    if (parts.length !== 3) {
+      throw new Error(`Formato inválido no round ${index + 1}`);
+    }
+
+    // Extração segura da distância
+    const distanceMatch = parts[0].match(/([\d.]+)(K?)\s?km/);
+    if (!distanceMatch) {
+      throw new Error(`Distância inválida no round ${index + 1}`);
+    }
+    const distance =
+      parseFloat(distanceMatch[1]) * (distanceMatch[2] ? 1000 : 1);
+
+    // Extração segura dos anos
+    const years = parseInt(parts[1].match(/\d+/)?.[0] || 0);
+
+    // Extração segura da medalha
+    const medalMatch = parts[2].match(/(\p{Emoji}).+?(\d+)/u);
+    if (!medalMatch) {
+      throw new Error(`Medalha inválida no round ${index + 1}`);
+    }
 
     return {
-      name,
-      totalScore,
-      details,
+      distance,
+      years,
+      medal: medalMatch[1],
+      medalScore: parseInt(medalMatch[2]),
     };
-  } catch (error) {
-    console.error("Erro no parsing:", error);
-    throw new Error("Formato inválido");
-  }
+  });
+
+  return {
+    gameDate,
+    name,
+    totalScore,
+    details,
+  };
 };
 
 export default function PlayerForm({ onSuccess }) {
@@ -60,7 +100,7 @@ export default function PlayerForm({ onSuccess }) {
       setInput("");
       onSuccess();
     } catch (error) {
-      alert("Erro ao processar dados. Verifique o formato!");
+      alert(`Erro: ${error.message}`);
     }
   };
 

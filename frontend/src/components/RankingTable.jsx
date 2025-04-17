@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function RankingTable({ data }) {
+export default function RankingTable({ data, currentDate }) {
   return (
     <div className="ranking-table">
-      <h2>Ranking do Dia</h2>
+      <h2>Ranking de {currentDate}</h2>
       <table>
         <thead>
           <tr>

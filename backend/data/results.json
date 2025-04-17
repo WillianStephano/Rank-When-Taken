@@ -1,150 +1,154 @@
-[
-  {
-    "name": "Teste",
-    "totalScore": 700,
-    "details": [
-      {
-        "distance": 8000,
-        "years": 4,
-        "medal": "🥉",
-        "medalScore": 100
-      },
-      {
-        "distance": 8500,
-        "years": 11,
-        "medal": "🥉",
-        "medalScore": 90
-      },
-      {
-        "distance": 1100,
-        "years": 5,
-        "medal": "🥈",
-        "medalScore": 160
-      },
-      {
-        "distance": 338,
-        "years": 15,
-        "medal": "🥈",
-        "medalScore": 150
-      },
-      {
-        "distance": 1700,
-        "years": 9,
-        "medal": "🥈",
-        "medalScore": 140
-      }
-    ],
-    "timestamp": "2025-04-17T20:01:05.670Z"
-  },
-  {
-    "name": "Will",
-    "totalScore": 656,
-    "details": [
-      {
-        "distance": 1000,
-        "years": 4,
-        "medal": "🥉",
-        "medalScore": 104
-      },
-      {
-        "distance": 2000,
-        "years": 11,
-        "medal": "🥉",
-        "medalScore": 88
-      },
-      {
-        "distance": 3000,
-        "years": 5,
-        "medal": "🥈",
-        "medalScore": 163
-      },
-      {
-        "distance": 4,
-        "years": 15,
-        "medal": "🥈",
-        "medalScore": 159
-      },
-      {
-        "distance": 5000,
-        "years": 9,
-        "medal": "🥈",
-        "medalScore": 142
-      }
-    ],
-    "timestamp": "2025-04-17T20:10:23.172Z"
-  },
-  {
-    "name": "I",
-    "totalScore": 656,
-    "details": [
-      {
-        "distance": 1000,
-        "years": 4,
-        "medal": "🥉",
-        "medalScore": 104
-      },
-      {
-        "distance": 2000,
-        "years": 11,
-        "medal": "🥉",
-        "medalScore": 88
-      },
-      {
-        "distance": 3000,
-        "years": 5,
-        "medal": "🥈",
-        "medalScore": 163
-      },
-      {
-        "distance": 4,
-        "years": 15,
-        "medal": "🥈",
-        "medalScore": 159
-      },
-      {
-        "distance": 5000,
-        "years": 9,
-        "medal": "🥈",
-        "medalScore": 142
-      }
-    ],
-    "timestamp": "2025-04-17T20:11:05.800Z"
-  },
-  {
-    "name": "I",
-    "totalScore": 656,
-    "details": [
-      {
-        "distance": 1000,
-        "years": 4,
-        "medal": "🥉",
-        "medalScore": 104
-      },
-      {
-        "distance": 2000,
-        "years": 11,
-        "medal": "🥉",
-        "medalScore": 88
-      },
-      {
-        "distance": 3000,
-        "years": 5,
-        "medal": "🥈",
-        "medalScore": 163
-      },
-      {
-        "distance": 4,
-        "years": 15,
-        "medal": "🥈",
-        "medalScore": 159
-      },
-      {
-        "distance": 5000,
-        "years": 9,
-        "medal": "🥈",
-        "medalScore": 142
-      }
-    ],
-    "timestamp": "2025-04-17T20:15:22.795Z"
-  }
-]
+{
+  "2025-04-17": [
+    {
+      "name": "I",
+      "totalScore": 656,
+      "details": [
+        {
+          "distance": 1000,
+          "years": 4,
+          "medal": "🥉",
+          "medalScore": 104
+        },
+        {
+          "distance": 2000,
+          "years": 11,
+          "medal": "🥉",
+          "medalScore": 88
+        },
+        {
+          "distance": 3000,
+          "years": 5,
+          "medal": "🥈",
+          "medalScore": 163
+        },
+        {
+          "distance": 4,
+          "years": 15,
+          "medal": "🥈",
+          "medalScore": 159
+        },
+        {
+          "distance": 5000,
+          "years": 9,
+          "medal": "🥈",
+          "medalScore": 142
+        }
+      ],
+      "timestamp": "2025-04-17T21:02:22.031Z"
+    },
+    {
+      "name": "I",
+      "totalScore": 656,
+      "details": [
+        {
+          "distance": 1000,
+          "years": 4,
+          "medal": "🥉",
+          "medalScore": 104
+        },
+        {
+          "distance": 2000,
+          "years": 11,
+          "medal": "🥉",
+          "medalScore": 88
+        },
+        {
+          "distance": 3000,
+          "years": 5,
+          "medal": "🥈",
+          "medalScore": 163
+        },
+        {
+          "distance": 4,
+          "years": 15,
+          "medal": "🥈",
+          "medalScore": 159
+        },
+        {
+          "distance": 5000,
+          "years": 9,
+          "medal": "🥈",
+          "medalScore": 142
+        }
+      ],
+      "timestamp": "2025-04-17T21:02:33.673Z"
+    },
+    {
+      "name": "I",
+      "totalScore": 656,
+      "details": [
+        {
+          "distance": 8000,
+          "years": 4,
+          "medal": "🥉",
+          "medalScore": 4
+        },
+        {
+          "distance": 8500,
+          "years": 11,
+          "medal": "🥉",
+          "medalScore": 8
+        },
+        {
+          "distance": 1100,
+          "years": 5,
+          "medal": "🥈",
+          "medalScore": 63
+        },
+        {
+          "distance": 338,
+          "years": 15,
+          "medal": "🥈",
+          "medalScore": 59
+        },
+        {
+          "distance": 1700,
+          "years": 9,
+          "medal": "🥈",
+          "medalScore": 42
+        }
+      ],
+      "timestamp": "2025-04-17T21:27:56.080Z"
+    }
+  ],
+  "2025-04-16": [
+    {
+      "name": "I",
+      "totalScore": 656,
+      "details": [
+        {
+          "distance": 8000,
+          "years": 4,
+          "medal": "🥉",
+          "medalScore": 4
+        },
+        {
+          "distance": 8500,
+          "years": 11,
+          "medal": "🥉",
+          "medalScore": 8
+        },
+        {
+          "distance": 1100,
+          "years": 5,
+          "medal": "🥈",
+          "medalScore": 63
+        },
+        {
+          "distance": 338,
+          "years": 15,
+          "medal": "🥈",
+          "medalScore": 59
+        },
+        {
+          "distance": 1700,
+          "years": 9,
+          "medal": "🥈",
+          "medalScore": 42
+        }
+      ],
+      "timestamp": "2025-04-17T21:28:18.410Z"
+    }
+  ]
+}
