@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react"; // Adicionei o useEffect
+import React, { useEffect, useState } from "react";
 import DateSelector from "./components/DateSelector";
 import PlayerForm from "./components/PlayerForm";
 import RankingTable from "./components/RankingTable";
@@ -7,15 +7,17 @@ import "./styles.css";
 
 function App() {
   const [ranking, setRanking] = useState([]);
-  const [currentDate, setCurrentDate] = useState(null); // Alterei para null
+  const [currentDate, setCurrentDate] = useState(null);
+  const [allDates, setAllDates] = useState([]);
 
-  // useEffect para carregar dados inicialmente
+  // Carregar dados iniciais
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
         const datesResponse = await axios.get(
           "http://localhost:5000/api/dates"
         );
+        setAllDates(datesResponse.data);
         if (datesResponse.data.length > 0) {
           setCurrentDate(datesResponse.data[0]);
         }
@@ -23,11 +25,10 @@ function App() {
         console.error("Erro ao buscar datas:", error);
       }
     };
-
     fetchInitialData();
   }, []);
 
-  // useEffect para atualizar quando currentDate mudar
+  // Atualizar ranking quando a data mudar
   useEffect(() => {
     const refreshRanking = async () => {
       if (!currentDate) return;
@@ -41,9 +42,18 @@ function App() {
         console.error("Erro ao buscar ranking:", error);
       }
     };
-
     refreshRanking();
-  }, [currentDate]); // Só executa quando currentDate mudar
+  }, [currentDate]);
+
+  // Atualizar lista de datas após novo registro
+  const refreshDates = async () => {
+    try {
+      const datesResponse = await axios.get("http://localhost:5000/api/dates");
+      setAllDates(datesResponse.data);
+    } catch (error) {
+      console.error("Erro ao atualizar datas:", error);
+    }
+  };
 
   return (
     <div className="container">
@@ -51,16 +61,14 @@ function App() {
 
       <div className="header-section">
         <DateSelector
-          onDateChange={(date) => setCurrentDate(date)} // Simplificado
+          dates={allDates}
+          currentDate={currentDate}
+          onDateChange={setCurrentDate}
         />
         <PlayerForm
-          onSuccess={() => {
-            if (currentDate) {
-              axios
-                .get(`http://localhost:5000/api/results/${currentDate}`)
-                .then((res) => setRanking(res.data))
-                .catch(console.error);
-            }
+          onSuccess={(newDate) => {
+            refreshDates();
+            setCurrentDate(newDate);
           }}
         />
       </div>
