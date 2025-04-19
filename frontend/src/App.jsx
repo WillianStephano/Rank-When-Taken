@@ -10,7 +10,7 @@ function App() {
   const [currentDate, setCurrentDate] = useState(null);
   const [allDates, setAllDates] = useState([]);
 
-  // Carregar dados iniciais
+  // Carrega dados iniciais
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
@@ -28,7 +28,7 @@ function App() {
     fetchInitialData();
   }, []);
 
-  // Atualizar ranking quando a data mudar
+  // Atualiza ranking quando a data mudar
   useEffect(() => {
     const refreshRanking = async () => {
       if (!currentDate) return;
@@ -45,13 +45,21 @@ function App() {
     refreshRanking();
   }, [currentDate]);
 
-  // Atualizar lista de datas após novo registro
-  const refreshDates = async () => {
+  // Função para atualizar a lista de datas (agora sendo usada)
+  const handleNewResult = async (gameDate) => {
     try {
+      // Atualiza a lista de datas
       const datesResponse = await axios.get("http://localhost:5000/api/dates");
       setAllDates(datesResponse.data);
+
+      // Atualiza o ranking para a data do novo resultado
+      setCurrentDate(gameDate);
+      const resultsResponse = await axios.get(
+        `http://localhost:5000/api/results/${gameDate}`
+      );
+      setRanking(resultsResponse.data);
     } catch (error) {
-      console.error("Erro ao atualizar datas:", error);
+      console.error("Erro ao atualizar dados:", error);
     }
   };
 
@@ -66,10 +74,7 @@ function App() {
           onDateChange={setCurrentDate}
         />
         <PlayerForm
-          onSuccess={(newDate) => {
-            refreshDates();
-            setCurrentDate(newDate);
-          }}
+          onSuccess={handleNewResult}
         />
       </div>
 

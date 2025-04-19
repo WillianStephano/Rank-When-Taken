@@ -62,3 +62,41 @@ th {
   margin-right: 8px;
   font-size: 1.2em;
 }
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 8px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.error-message {
+  color: #ff4444;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+input:invalid,
+textarea:invalid {
+  border-color: #ff4444;
+}
+
+.required-field::after {
+  content: " *";
+  color: #ff4444;
+}

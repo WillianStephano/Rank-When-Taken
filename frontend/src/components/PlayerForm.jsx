@@ -1,5 +1,5 @@
-import React, { useState } from "react";
 import axios from "axios";
+import React, { useState } from "react";
 
 const parseInput = (text) => {
   const lines = text
@@ -92,13 +92,25 @@ const parseInput = (text) => {
 
 export default function PlayerForm({ onSuccess }) {
   const [input, setInput] = useState("");
+  const [playerName, setPlayerName] = useState("");
+  const [nameError, setNameError] = useState("");
 
   const handleSubmit = async () => {
     try {
       const playerData = parseInput(input);
+
+      if (!playerName.trim()) {
+        setNameError("Por favor, digite seu nome");
+        return;
+      }
+      setNameError("");
+
+      playerData.name = playerName.trim();
+
       await axios.post("http://localhost:5000/api/results", playerData);
       setInput("");
-      onSuccess();
+      setPlayerName("");
+      onSuccess(playerData.gameDate);
     } catch (error) {
       alert(`Erro: ${error.message}`);
     }
@@ -107,6 +119,21 @@ export default function PlayerForm({ onSuccess }) {
   return (
     <div className="form-container">
       <h2>Adicionar Resultado</h2>
+
+      <div className="input-group">
+        <label>Seu Nome: *</label>
+        <input
+          type="text"
+          value={playerName}
+          onChange={(e) => {
+            setPlayerName(e.target.value);
+            if (nameError) setNameError(""); // Limpa erro ao digitar
+          }}
+          placeholder="Digite seu nome"
+        />
+        {nameError && <div className="error-message">{nameError}</div>}
+      </div>
+
       <textarea
         value={input}
         onChange={(e) => setInput(e.target.value)}
