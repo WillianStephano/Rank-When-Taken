@@ -1,5 +1,5 @@
-import axios from "axios";
 import React, { useState } from "react";
+import { addGameResult } from "../services/firestore";
 
 const parseInput = (text) => {
   const lines = text
@@ -69,16 +69,17 @@ const parseInput = (text) => {
     const years = parseInt(parts[1].match(/\d+/)?.[0] || 0);
 
     // Extração segura da medalha
-    const medalMatch = parts[2].match(/(\p{Emoji}).+?(\d+)/u);
+    const medalMatch = parts[2].match(/(\p{Emoji})\D*(\d+)/u);
     if (!medalMatch) {
-      throw new Error(`Medalha inválida no round ${index + 1}`);
+      throw new Error(`Formato de medalha inválido no round ${index + 1}`);
     }
+    const medalScore = parseInt(medalMatch[2]);
 
     return {
       distance,
       years,
       medal: medalMatch[1],
-      medalScore: parseInt(medalMatch[2]),
+      medalScore,
     };
   });
 
@@ -105,9 +106,11 @@ export default function PlayerForm({ onSuccess }) {
       }
       setNameError("");
 
-      playerData.name = playerName.trim();
+      await addGameResult(playerData.gameDate, {
+        ...playerData,
+        name: playerName.trim(),
+      });
 
-      await axios.post("http://localhost:5000/api/results", playerData);
       setInput("");
       setPlayerName("");
       onSuccess(playerData.gameDate);

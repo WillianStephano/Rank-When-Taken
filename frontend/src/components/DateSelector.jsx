@@ -1,19 +1,36 @@
-import React from "react";
+// frontend/src/components/DateSelector.jsx
+import React, { useEffect, useState } from "react";
+import { getDates } from "../services/firestore"; // Você precisará criar esta função
 
-export default function DateSelector({ dates, currentDate, onDateChange }) {
+export default function DateSelector({ onDateChange }) {
+  const [dates, setDates] = useState([]);
+  const [selectedDate, setSelectedDate] = useState("");
+
+  useEffect(() => {
+    const loadDates = async () => {
+      const datesList = await getDates(); // Implemente esta função
+      setDates(datesList);
+      if (datesList.length > 0) {
+        setSelectedDate(datesList[0]);
+        onDateChange(datesList[0]);
+      }
+    };
+    loadDates();
+  }, []);
+
   return (
-    <div className="date-selector">
-      <select
-        value={currentDate || ""}
-        onChange={(e) => onDateChange(e.target.value)}
-        disabled={!dates.length}
-      >
-        {dates.map((date) => (
-          <option key={date} value={date}>
-            {date}
-          </option>
-        ))}
-      </select>
-    </div>
+    <select
+      value={selectedDate}
+      onChange={(e) => {
+        setSelectedDate(e.target.value);
+        onDateChange(e.target.value);
+      }}
+    >
+      {dates.map((date) => (
+        <option key={date} value={date}>
+          {date}
+        </option>
+      ))}
+    </select>
   );
 }
