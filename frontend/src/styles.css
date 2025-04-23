@@ -1,3 +1,4 @@
+/* styles.css otimizado */
 .container {
   max-width: 800px;
   margin: 0 auto;
@@ -5,62 +6,9 @@
   font-family: Arial, sans-serif;
 }
 
+/* Formulário */
 .form-container {
   margin-bottom: 40px;
-}
-
-textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border: 2px solid #ddd;
-  border-radius: 4px;
-  resize: vertical;
-}
-
-button {
-  background-color: #4caf50;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-.ranking-table {
-  overflow-x: auto;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
-}
-
-th,
-td {
-  padding: 12px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-th {
-  background-color: #f2f2f2;
-}
-
-.detail-item {
-  padding: 4px 0;
-  display: flex;
-  align-items: center;
-}
-
-.medal {
-  margin-right: 8px;
-  font-size: 1.2em;
 }
 
 .input-group {
@@ -73,7 +21,8 @@ th {
   font-weight: bold;
 }
 
-.input-group input {
+.input-group input,
+textarea {
   width: 100%;
   padding: 8px;
   border: 2px solid #ddd;
@@ -81,8 +30,24 @@ th {
   font-size: 16px;
 }
 
-.input-group {
-  margin-bottom: 15px;
+textarea {
+  resize: vertical;
+  min-height: 150px;
+  margin: 10px 0;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #45a049;
 }
 
 .error-message {
@@ -91,12 +56,181 @@ th {
   margin-top: 5px;
 }
 
-input:invalid,
-textarea:invalid {
-  border-color: #ff4444;
+/* Tabela */
+.ranking-table {
+  overflow-x: auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background: white;
 }
 
-.required-field::after {
-  content: " *";
-  color: #ff4444;
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #eceff1;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.position {
+  width: 8%;
+  font-weight: 700;
+  color: #3498db;
+}
+
+.player-name {
+  width: 25%;
+  font-weight: 500;
+  color: #34495e;
+}
+
+.total-score {
+  width: 10%;
+  font-weight: 700;
+  color: #27ae60;
+  text-align: center;
+}
+
+/* Detalhes dos rounds */
+.round-details {
+  width: 57%;
+  padding: 8px 0;
+}
+
+.round-detail {
+  padding: 8px 0;
+  margin: 6px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.round-detail:last-child {
+  border-bottom: none;
+}
+
+.round-stats {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.distance {
+  background: #f1f3f4;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: #7f8c8d;
+  order: 1;
+}
+
+.years {
+  color: #95a5a6;
+  font-size: 0.9em;
+  order: 2;
+}
+
+.medal-badge {
+  font-size: 1.4em;
+  min-width: 32px;
+  text-align: center;
+  margin-right: 4px;
+  order: 3;
+}
+
+.medal-score {
+  background-color: #3498db;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 16px;
+  font-size: 0.85em;
+  font-weight: 500;
+  order: 4;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .container {
+    padding: 10px;
+  }
+
+  .header-section {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  th,
+  td {
+    padding: 10px 8px;
+    font-size: 14px;
+  }
+
+  .position {
+    width: 10%;
+  }
+
+  .player-name {
+    width: 30%;
+  }
+
+  .total-score {
+    width: 15%;
+  }
+
+  .round-details {
+    width: 45%;
+  }
+
+  .round-stats {
+    gap: 8px;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  th,
+  td {
+    padding: 8px 6px;
+    font-size: 13px;
+  }
+
+  .position {
+    width: 12%;
+  }
+
+  .player-name {
+    width: 28%;
+  }
+
+  .total-score {
+    width: 20%;
+  }
+
+  .round-details {
+    width: 40%;
+  }
+
+  .round-stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .distance {
+    order: 0;
+  }
 }
