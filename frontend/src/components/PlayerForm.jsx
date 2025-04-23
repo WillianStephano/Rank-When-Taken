@@ -58,13 +58,21 @@ const parseInput = (text) => {
     }
 
     // Extração segura da distância
-    const distanceMatch = parts[0].match(/([\d.]+)(K?)\s?km/);
-    if (!distanceMatch) {
-      throw new Error(`Distância inválida no round ${index + 1}`);
-    }
-    const distance =
-      parseFloat(distanceMatch[1]) * (distanceMatch[2] ? 1000 : 1);
+    const distanceText = parts[0].split("📍")[1].trim(); // Exemplo: "942 km" ou "902 m"
+    const distanceMatch = distanceText.match(/^([\d.]+)K?\s?(km|m)$/i); // Regex corrigida
 
+    if (!distanceMatch) {
+      throw new Error(`Formato de distância inválido: "${distanceText}"`);
+    }
+
+    const value = parseFloat(distanceMatch[1]);
+    const unit = distanceMatch[2].toLowerCase();
+
+    // Conversão correta para metros
+    const distance =
+      unit === "km"
+        ? value * 1000 // Converte km para metros
+        : value; // Mantém metros
     // Extração segura dos anos
     const years = parseInt(parts[1].match(/\d+/)?.[0] || 0);
 

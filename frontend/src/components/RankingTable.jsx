@@ -24,7 +24,7 @@ export default function RankingTable({ data, currentDate }) {
                   const distance =
                     detail.distance >= 1000
                       ? `${(detail.distance / 1000).toFixed(1)} km`
-                      : `${detail.distance.toFixed(0)} m`;
+                      : `${Math.round(detail.distance)} m`;
 
                   return (
                     <div key={i} className="round-detail">
