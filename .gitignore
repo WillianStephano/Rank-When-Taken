@@ -1,4 +1,6 @@
 # .gitignore para o projeto RankWhenTaken
+frontend/src/firebase.js
+frontend/src/firebaseConfig.js
 
 ### Sistema Operacional ###
 .DS_Store

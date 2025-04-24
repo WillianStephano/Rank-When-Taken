@@ -7,7 +7,7 @@ import {
     query,
     setDoc,
 } from "firebase/firestore";
-import { db } from "../firebase";
+import { db } from "../firebaseConfig";
 
 export const addGameResult = async (gameDate, playerData) => {
   const gameRef = doc(db, "games", gameDate);

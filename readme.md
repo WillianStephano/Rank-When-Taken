@@ -20,8 +20,9 @@ WhenTaken é um jogo desenvolvido pela Teuteuf Games em que o desafio é adivinh
 ## 🛠️ Tecnologias
 
 - **Frontend**: React, CSS;
-- **Backend**: NodeJS, Express;
+- **Backend**: NodeJS 
 - **Armazenamento** : Json;
+(Backend que utilizava express e o banco de dados local foi descontinuado, a aplicação utiliza apenas o conteudo da pasta "frontend")
 
 ## 📦 Pré-requisitos
 
@@ -35,12 +36,22 @@ WhenTaken é um jogo desenvolvido pela Teuteuf Games em que o desafio é adivinh
 git clone https://github.com/seu-usuario/whentaken-rank.git
 cd whentaken-rank
 
-# Instale e inicie o backend
-cd backend
-npm install
-node server.js
+# Instale as dependências
+cd frontend && npm install
 
-# Em outro terminal, instale e inicie o frontend
-cd ../frontend
-npm install
-npm start
+# Configure as variáveis de ambiente
+1. Crie um arquivo `firebaseConfig.js` na pasta frontend/src com:
+REACT_APP_FIREBASE_API_KEY="SUA_API_KEY"
+REACT_APP_FIREBASE_AUTH_DOMAIN="SEU_AUTH_DOMAIN"
+REACT_APP_FIREBASE_PROJECT_ID="SEU_PROJECT_ID"
+REACT_APP_FIREBASE_STORAGE_BUCKET="SEU_STORAGE_BUCKET"
+REACT_APP_FIREBASE_MESSAGING_SENDER_ID="SEU_SENDER_ID"
+REACT_APP_FIREBASE_APP_ID="SEU_APP_ID"
+
+2. Configure o Firebase CLI:
+firebase login
+firebase projects:list # Verifique se o projeto aparece na lista
+
+# Inicie o serviço
+cd frontend && npm start
+
