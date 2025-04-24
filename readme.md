@@ -49,7 +49,9 @@ REACT_APP_FIREBASE_STORAGE_BUCKET="SEU_STORAGE_BUCKET"
 REACT_APP_FIREBASE_MESSAGING_SENDER_ID="SEU_SENDER_ID"
 REACT_APP_FIREBASE_APP_ID="SEU_APP_ID"
 
-2. Configure o Firebase CLI:
+2. Crie um projeto no Firebase
+
+3. Configure o Firebase CLI:
 firebase login
 firebase projects:list # Verifique se o projeto aparece na lista
 
