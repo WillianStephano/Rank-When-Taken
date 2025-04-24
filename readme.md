@@ -4,6 +4,7 @@
 
 Sistema para registrar e visualizar rankings diários do jogo [WhenTaken](https://whentaken.com/), com armazenamento de histórico completo e análise de desempenho.
 Joque com seus amigos, copie e cole o resultado e visualize o rank diario das partidas!
+(Backend que utilizava express e o banco de dados local foi descontinuado, a aplicação atualmente utiliza apenas o conteudo da pasta "frontend")
 
 ## O que é o WhenTaken?
 WhenTaken é um jogo desenvolvido pela Teuteuf Games em que o desafio é adivinhar quando e onde uma determinada foto foi tirada. A cada palpite, o jogador acumula pontos com base na precisão de sua resposta
